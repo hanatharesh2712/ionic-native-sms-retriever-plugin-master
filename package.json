@@ -1,0 +1,19 @@
+{
+  "name": "SmsRetriever",
+  "version": "0.0.1",
+  "description": "SmsRetriever",
+  "cordova": {
+    "id": "cordova-plugin-sms-retriever-manager",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Haresh",
+  "license": "DEV"
+}
