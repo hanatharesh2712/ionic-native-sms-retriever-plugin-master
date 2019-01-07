@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-sms-retriever-manager" version="0.0.1">
+        id="cordova-plugin-sensor-manager" version="0.0.1">
     <name>Device</name>
-    <description>Cordova SMS retriever Manager Plugin</description>
-    <license>DEV</license>
-    <keywords>cordova, ionic ,SMS, SMS retriever</keywords>
+    <description>Cordova Sensor Manager Plugin</description>
+    <license>MIT</license>
+    <keywords>cordova,device,sensors</keywords>
     
-    <js-module name="AndroidSmsRetrieverManager" src="www/SmsRetrieverManager.js">
-        <clobbers target="cordova.plugins.SmsRetrieverManager" />
+    <js-module name="AndroidSensorManager" src="www/sensorManager.js">
+        <clobbers target="cordova.plugins.sensorManager" />
     </js-module>
     <engines>
         <engine name="cordova" version=">=3.6.0"></engine>
     </engines>
     <platform name="android">
-        <source-file src="src/android/com/codingsans/ionic/sms-retriever/AndroidSmsRetrieverManager.java"
-                     target-dir="src/com/codingsans/ionic/sms-retriever"></source-file>
+        <source-file src="src/android/com/codingsans/ionic/sensormanager/AndroidSensorManager.java"
+                     target-dir="src/com/codingsans/ionic/sensormanager"></source-file>
 
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="AndroidSmsRetrieverManager">
-                <param name="android-package" value="com.codingsans.ionic.SmsRetrieverManager.AndroidSmsRetrieverManager" />
+            <feature name="AndroidSensorManager">
+                <param name="android-package" value="com.codingsans.ionic.sensormanager.AndroidSensorManager" />
             </feature>
         </config-file>
     </platform>

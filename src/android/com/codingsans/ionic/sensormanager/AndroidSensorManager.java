@@ -16,7 +16,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.hardware.Sensor;
 
-public class AndroidSmsRetrieverManager extends CordovaPlugin {
+public class AndroidSensorManager extends CordovaPlugin {
     private SensorManager mSensorManager;
     private Sensor accelerometer;
     private CallbackContext callbackContext;
