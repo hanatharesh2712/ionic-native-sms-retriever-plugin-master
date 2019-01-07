@@ -1,4 +1,4 @@
-package com.codingsans.ionic.sensormanager;
+package com.codingsans.ionic.smsRetriever;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -37,6 +37,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        
         if ("start".equals(action)) {
             mSensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI);
         } else if ("stop".equals(action)) {
