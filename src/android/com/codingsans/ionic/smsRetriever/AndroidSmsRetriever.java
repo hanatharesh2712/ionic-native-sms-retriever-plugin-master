@@ -113,6 +113,10 @@ public class AndroidSmsRetriever extends CordovaPlugin {
             //mSensorManager.unregisterListener(listener);
 
         } else if ("getCurrent".equals(action)) {
+            
+            LOG.v(TAG, "Executing action: getCurrent");
+            Toast.makeText(context,"Executing action: "+ action, Toast.LENGTH_SHORT).show();
+            
             PluginResult result = new PluginResult(PluginResult.Status.OK, this.data);
             callbackContext.sendPluginResult(result);
             return true;
