@@ -1,19 +1,34 @@
 {
-  "name": "SmsRetriever",
+  "name": "cordova-plugin-sms-retriever-manager",
   "version": "0.0.1",
-  "description": "SmsRetriever",
+  "description": "Cross-platform plugin for Cordova / PhoneGap to to easily retrive SMS using Google SMS retriver API. Available for Android.",
   "cordova": {
     "id": "cordova-plugin-sms-retriever-manager",
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master.git"
+  },
   "keywords": [
+    "cordova",
+    "phonegap",
+    "sms",
     "ecosystem:cordova",
-    "cordova-android",
-    "cordova-ios"
+    "cordova-android"
   ],
-  "author": "Haresh",
-  "license": "DEV"
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Haresh Hanat",
+  "license": "DEV",
+  "bugs": {
+    "url": "https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master/issues"
+  },
+  "homepage": "https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master"
 }
