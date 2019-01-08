@@ -90,11 +90,11 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Successfully started retriever, expect broadcast intent
                     // ...
                      LOG.v(TAG, "Executing action: addOnSuccessListener");
-                     Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(cordova.getActivity().getApplicationContext(),"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-                    this.cordova.getActivity().getApplicationContext().registerReceiver(smsReceiver, intentFilter);
+                    cordova.getActivity().getApplicationContext().registerReceiver(smsReceiver, intentFilter);
                 }
             });
 
@@ -104,7 +104,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Failed to start retriever, inspect Exception for more details
                     // ...
                     LOG.v(TAG, "Executing action: addOnFailureListener");
-                    Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(cordova.getActivity().getApplicationContext(),"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
                 }
             });
             //mSensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI);
@@ -158,7 +158,7 @@ class SmsBrReceiver extends BroadcastReceiver {
             switch(status.getStatusCode()) {
                 case SUCCESS:
                     //LOG.v(TAG, "Retrieved sms");
-                    Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Retrieved sms", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(cordova.getActivity().getApplicationContext(),"Retrieved sms", Toast.LENGTH_SHORT).show();
 
                     String smsMessage = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
                     //Log.d(TAG, "Retrieved sms code: " + smsMessage);
