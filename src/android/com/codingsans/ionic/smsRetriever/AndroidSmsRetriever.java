@@ -33,7 +33,7 @@ import static com.google.android.gms.common.api.CommonStatusCodes.*;
 public class AndroidSmsRetriever extends CordovaPlugin {
     private SmsRetrieverClient smsRetrieverClient;
     private SmsBrReceiver smsReceiver;
-    Context context = null;
+    //Context context = null;
     public static final int MAX_TIMEOUT = 300000; // 5 mins in millis
     private static final String TAG = "SmsRetriever";
     //private SensorManager mSensorManager;
@@ -41,15 +41,10 @@ public class AndroidSmsRetriever extends CordovaPlugin {
     private CallbackContext callbackContext;
     private JSONObject data = new JSONObject();
 
-  @Override
-  protected void pluginInitialize() {
-    context = cordova.getActivity().getApplicationContext();
-  }
-
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         LOG.v(TAG, "SmsRetriever: initialization");
-        Toast.makeText(context,"SmsRetriever: initialization", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.cordova.getActivity().getApplicationContext(),"SmsRetriever: initialization", Toast.LENGTH_SHORT).show();
 
         super.initialize(cordova, webView);
 
@@ -59,7 +54,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
         // Get an instance of SmsRetrieverClient, used to start listening for a matching
         // SMS message.
-        smsRetrieverClient = SmsRetriever.getClient(context);
+        smsRetrieverClient = SmsRetriever.getClient(this.cordova.getActivity().getApplicationContext());
 
         //mSensorManager = (SensorManager) cordova.getActivity().getSystemService(Context.SENSOR_SERVICE);
         //accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -70,7 +65,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
         //mSensorManager.unregisterListener(listener);
 
         if (smsReceiver != null) {
-            context.unregisterReceiver(smsReceiver);
+            this.cordova.getActivity().getApplicationContext().unregisterReceiver(smsReceiver);
             smsReceiver.cancelTimeout();
             smsReceiver = null;
         }
@@ -79,7 +74,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         LOG.v(TAG, "Executing action: " + action);
-        Toast.makeText(context,"Executing action: " + action, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: " + action, Toast.LENGTH_SHORT).show();
 
         if ("start".equals(action)) {
             // Starts SmsRetriever, which waits for ONE matching SMS message until timeout
@@ -95,11 +90,11 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Successfully started retriever, expect broadcast intent
                     // ...
                      LOG.v(TAG, "Executing action: addOnSuccessListener");
-                     Toast.makeText(context,"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-                    context.registerReceiver(smsReceiver, intentFilter);
+                    this.cordova.getActivity().getApplicationContext().registerReceiver(smsReceiver, intentFilter);
                 }
             });
 
@@ -109,7 +104,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Failed to start retriever, inspect Exception for more details
                     // ...
                     LOG.v(TAG, "Executing action: addOnFailureListener");
-                    Toast.makeText(context,"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
                 }
             });
             //mSensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI);
@@ -119,7 +114,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
         } else if ("getCurrent".equals(action)) {
 
             LOG.v(TAG, "Executing action: getCurrent");
-            Toast.makeText(context,"Executing action: "+ action, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Executing action: "+ action, Toast.LENGTH_SHORT).show();
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, this.data);
             callbackContext.sendPluginResult(result);
@@ -163,7 +158,7 @@ class SmsBrReceiver extends BroadcastReceiver {
             switch(status.getStatusCode()) {
                 case SUCCESS:
                     //LOG.v(TAG, "Retrieved sms");
-                    Toast.makeText(context,"Retrieved sms", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.cordova.getActivity().getApplicationContext(),"Retrieved sms", Toast.LENGTH_SHORT).show();
 
                     String smsMessage = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
                     //Log.d(TAG, "Retrieved sms code: " + smsMessage);
