@@ -6,6 +6,13 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.LOG;
+
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -15,13 +22,18 @@ import org.json.JSONException;
 import android.content.Context;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.tasks.Task;
+
+import static com.google.android.gms.common.api.CommonStatusCodes.*;
 
 public class AndroidSmsRetriever extends CordovaPlugin {
     private SmsRetrieverClient smsRetrieverClient;
     private SmsBrReceiver smsReceiver;
+    Context context = this.cordova.getActivity().getApplicationContext();
 
     public static final int MAX_TIMEOUT = 300000; // 5 mins in millis
     private static final String TAG = "SmsRetriever";
@@ -33,7 +45,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         LOG.v(TAG, "SmsRetriever: initialization");
-        Toast.makeText(TAG,"SmsRetriever: initialization", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"SmsRetriever: initialization", Toast.LENGTH_SHORT).show();
 
         super.initialize(cordova, webView);
 
@@ -43,7 +55,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
         // Get an instance of SmsRetrieverClient, used to start listening for a matching
         // SMS message.
-        smsRetrieverClient = SmsRetriever.getClient(this /* context */);
+        smsRetrieverClient = SmsRetriever.getClient(context);
 
         //mSensorManager = (SensorManager) cordova.getActivity().getSystemService(Context.SENSOR_SERVICE);
         //accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -54,7 +66,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
         //mSensorManager.unregisterListener(listener);
 
         if (smsReceiver != null) {
-            getApplicationContext().unregisterReceiver(smsReceiver);
+            context.unregisterReceiver(smsReceiver);
             smsReceiver.cancelTimeout();
             smsReceiver = null;
         }
@@ -63,7 +75,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         LOG.v(TAG, "Executing action: " + action);
-        Toast.makeText(TAG,"Executing action: " + action, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Executing action: " + action, Toast.LENGTH_SHORT).show();
 
         if ("start".equals(action)) {
             // Starts SmsRetriever, which waits for ONE matching SMS message until timeout
@@ -79,11 +91,11 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Successfully started retriever, expect broadcast intent
                     // ...
                      LOG.v(TAG, "Executing action: addOnSuccessListener");
-                     Toast.makeText(TAG,"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context,"Executing action: addOnSuccessListener", Toast.LENGTH_SHORT).show();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-                    getApplicationContext().registerReceiver(smsReceiver, intentFilter);
+                    context.registerReceiver(smsReceiver, intentFilter);
                 }
             });
 
@@ -93,7 +105,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
                     // Failed to start retriever, inspect Exception for more details
                     // ...
                     LOG.v(TAG, "Executing action: addOnFailureListener");
-                    Toast.makeText(TAG,"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
                 }
             });
             //mSensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI);
@@ -119,7 +131,7 @@ class SmsBrReceiver extends BroadcastReceiver {
     };
 
     public void setTimeout() {
-        h.postDelayed(r, MAX_TIMEOUT);
+        h.postDelayed(r, AndroidSmsRetriever.MAX_TIMEOUT);
     }
 
     public void cancelTimeout() {
@@ -138,22 +150,24 @@ class SmsBrReceiver extends BroadcastReceiver {
             // notifyStatus(STATUS_RESPONSE_RECEIVED, null);
             Bundle extras = intent.getExtras();
             Status status = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
+            LOG.v("SmsRetriever", "Status code: "+status.getStatusCode());
+
             switch(status.getStatusCode()) {
-                case CommonStatusCodes.SUCCESS:
-                    LOG.v(TAG, "Retrieved sms");
-                    Toast.makeText(TAG,"Retrieved sms", Toast.LENGTH_SHORT).show();
-                    
+                case SUCCESS:
+                    //LOG.v(TAG, "Retrieved sms");
+                    Toast.makeText(context,"Retrieved sms", Toast.LENGTH_SHORT).show();
+
                     String smsMessage = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
                     //Log.d(TAG, "Retrieved sms code: " + smsMessage);
                     if (smsMessage != null) {
                         //verifyMessage(smsMessage);
-                        data = new JSONObject();
-                        try {
-                            data.put("Message",smsMessage);
-                        } catch(JSONException e) {}
+                        //data = new JSONObject();
+                        //try {
+                            //data.put("Message",smsMessage);
+                        //} catch(JSONException e) {}
                     }
                     break;
-                case CommonStatusCodes.TIMEOUT:
+                case TIMEOUT:
                     doTimeout();
                     break;
                 default:
@@ -163,10 +177,9 @@ class SmsBrReceiver extends BroadcastReceiver {
     }
 
     private void doTimeout() {
-        LOG.v(TAG, "Waiting for sms timed out");
-        Toast.makeText(TAG,"Waiting for sms timed out", Toast.LENGTH_SHORT).show();
+         LOG.v("SmsRetriever", "Waiting for sms timed out");
+        //Toast.makeText(context,"Waiting for sms timed out", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "Waiting for sms timed out.");
         //Toast.makeText(PhoneNumberVerifier.this, getString(R.string.toast_unverified), Toast.LENGTH_LONG).show();
-        stopSelf();
     }
 }
