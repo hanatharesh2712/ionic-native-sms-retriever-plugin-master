@@ -33,14 +33,18 @@ import static com.google.android.gms.common.api.CommonStatusCodes.*;
 public class AndroidSmsRetriever extends CordovaPlugin {
     private SmsRetrieverClient smsRetrieverClient;
     private SmsBrReceiver smsReceiver;
-    Context context = this.cordova.getActivity().getApplicationContext();
-
+    Context context = null;
     public static final int MAX_TIMEOUT = 300000; // 5 mins in millis
     private static final String TAG = "SmsRetriever";
     //private SensorManager mSensorManager;
     //private Sensor accelerometer;
     private CallbackContext callbackContext;
     private JSONObject data = new JSONObject();
+
+  @Override
+  protected void pluginInitialize() {
+    context = cordova.getActivity().getApplicationContext();
+  }
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -113,10 +117,10 @@ public class AndroidSmsRetriever extends CordovaPlugin {
             //mSensorManager.unregisterListener(listener);
 
         } else if ("getCurrent".equals(action)) {
-            
+
             LOG.v(TAG, "Executing action: getCurrent");
             Toast.makeText(context,"Executing action: "+ action, Toast.LENGTH_SHORT).show();
-            
+
             PluginResult result = new PluginResult(PluginResult.Status.OK, this.data);
             callbackContext.sendPluginResult(result);
             return true;
