@@ -13,8 +13,8 @@
         <engine name="cordova" version=">=3.6.0"></engine>
     </engines>
     <platform name="android">
-     <preference name="FCM_VERSION" default="15.0.1"/>
-     <framework src="com.google.android.gms:play-services-auth-api-phone:$FCM_VERSION"/>
+     <preference name="PLAY_SERVICES_VERSION" default="15.0.1"/>
+     <framework src="com.google.android.gms:play-services-auth-api-phone:$PLAY_SERVICES_VERSION"/>
         <source-file src="src/android/com/codingsans/ionic/smsRetriever/AndroidSmsRetriever.java"
                      target-dir="src/com/codingsans/ionic/smsRetriever"></source-file>
 
