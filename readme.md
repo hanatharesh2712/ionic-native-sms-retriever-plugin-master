@@ -25,7 +25,7 @@ Javascript
 ```js
 var app = {
     retriveSMS: function() {
-        window['cordova']['plugins']['smsRetriever']['start'](
+        window['cordova']['plugins']['smsRetriever']['startWatching'](
       // the first callback is the success callback. We got back the native code’s result here.
       (result) => { 
 		console.log('Message', result);
