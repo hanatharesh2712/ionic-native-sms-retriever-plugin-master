@@ -3,7 +3,7 @@ var SmsRetrieverLoader = function(require, exports, module) {
 
   function SmsRetriever() {}
 
-  SmsRetriever.prototype.start = function(success, failure, timeOffset) {
+  SmsRetriever.prototype.startWatching = function(success, failure) {
     exec(success, failure, 'AndroidSmsRetriever', 'start', []);
   };
   
