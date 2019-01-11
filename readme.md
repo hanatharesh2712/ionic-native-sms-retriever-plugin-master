@@ -39,6 +39,9 @@ var app = {
     }
 };
 ```
+
+You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
+
 BUILD FAILED
 
 The problem is that you need to make sure that you set the target to android-19 or later in your ./platforms/android/project.properties file like this:
