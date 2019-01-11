@@ -12,5 +12,5 @@ var SmsRetrieverLoader = function(require, exports, module) {
 };
 
 SmsRetrieverLoader(require, exports, module);
-
+ 
 cordova.define("cordova/plugin/SmsRetriever", SmsRetrieverLoader);

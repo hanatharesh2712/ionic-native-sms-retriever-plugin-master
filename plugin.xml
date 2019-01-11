@@ -17,7 +17,7 @@
      <framework src="com.google.android.gms:play-services-auth-api-phone:$FCM_VERSION"/>
         <source-file src="src/android/com/codingsans/ionic/smsRetriever/AndroidSmsRetriever.java"
                      target-dir="src/com/codingsans/ionic/smsRetriever"></source-file>
-
+ 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AndroidSmsRetriever">
                 <param name="android-package" value="com.codingsans.ionic.smsRetriever.AndroidSmsRetriever" />
