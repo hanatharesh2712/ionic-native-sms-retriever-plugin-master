@@ -33,8 +33,7 @@ var app = {
       // the second is the error callback where we get back the errors
       (err) => {
         console.log(err);
-      },
-      100
+      }
     );
     }
 };
