@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master.git"
+    "url": "https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master.git"
   },
   "keywords": [
     "cordova",
