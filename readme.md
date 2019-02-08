@@ -7,6 +7,8 @@ Cross-platform plugin for Cordova / PhoneGap to to easily retrive SMS for your A
 
 Using the Cordova CLI run:
 
+```ionic cordova plugin add cordova-plugin-sms-retriever-manager@latest```
+
 It is also possible to install via repo url directly (unstable), run :
 
 ```sh
