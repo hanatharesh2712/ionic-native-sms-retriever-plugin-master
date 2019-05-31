@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-sms-retriever-manager" version="0.0.1">
+        id="cordova-plugin-sms-retriever-manager" version="0.0.2">
     <name>Device</name>
-    <description>Cordova Sensor Manager Plugin</description>
+    <description>Cordova SMS Retriver Plugin</description>
     <license>MIT</license>
-    <keywords>cordova,device,sensors</keywords>
+    <keywords>cordova,device,SMS, SMS retriver</keywords>
     
     <js-module name="AndroidSmsRetriever" src="www/smsRetriever.js">
         <clobbers target="cordova.plugins.smsRetriever" />

@@ -7,6 +7,9 @@ var SmsRetrieverLoader = function(require, exports, module) {
     exec(success, failure, 'AndroidSmsRetriever', 'start', []);
   };
   
+  SmsRetriever.prototype.getAppHash = function (success, failure) {
+      exec(success, failure, 'AndroidSmsRetriever', 'hash', []);
+  };
   var smsRetriever = new SmsRetriever();
   module.exports = smsRetriever;
 };
