@@ -7,7 +7,10 @@ Cross-platform plugin for Cordova / PhoneGap to to easily retrive SMS for your A
 
 Using the Cordova CLI run:
 
-```ionic cordova plugin add cordova-plugin-sms-retriever-manager@latest```
+```
+ionic cordova plugin add cordova-plugin-sms-retriever-manager
+npm install @ionic-native/sms-retriever
+```
 
 It is also possible to install via repo url directly (unstable), run :
 
@@ -40,14 +43,6 @@ var app = {
     }
 };
 ```
-
-You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
-
-To get your application hash code:
-
-* Without the correct hash, your app won't recieve the message callback. This only needs to be
-* generated once per app and stored. Then you can remove this function from your code.
-
 ```js
 var app = {
     getAppHash: function() {
@@ -63,6 +58,39 @@ var app = {
     }
 };
 ```
+
+Typescript
+```typescript
+  import { SmsRetriever } from '@ionic-native/sms-retriever';
+ 
+ 
+  constructor(private smsRetriever: SmsRetriever) { }
+ 
+  ...
+ 
+ // This function is to get hash string of APP.
+ // * @return {Promise<string>} Returns a promise that resolves when successfully generate hash of APP.
+  this.smsRetriever.getAppHash()
+    .then((res: any) => console.log(res))
+    .catch((error: any) => console.error(error));
+
+
+// * This function start wathching message arrive event and retrive message text.
+// * @return {Promise<string>} Returns a promise that resolves when retrives SMS text or TIMEOUT after 5 min.
+   this.smsRetriever.startWatching()
+    .then((res: any) => console.log(res))
+    .catch((error: any) => console.error(error));
+ 
+  ```
+
+You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
+
+To get your application hash code:
+
+* Without the correct hash, your app won't recieve the message callback. This only needs to be
+* generated once per app and stored. Then you can remove this function from your code.
+
+
 
 
 BUILD FAILED
