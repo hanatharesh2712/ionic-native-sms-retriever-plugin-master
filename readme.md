@@ -105,7 +105,7 @@ The problem is that you need to make sure that you set the target to android-19 
 
 If your app is successful or if you are working for a company, please consider donating some beer money :beer::
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)]()
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YP2LMRCJMGTNJ&source=url)
 
 Keep in mind that I am maintaining this repository on my free time so thank you for considering a donation. :+1:
 
