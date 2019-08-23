@@ -61,7 +61,7 @@ var app = {
 
 Typescript
 ```typescript
-  import { SmsRetriever } from '@ionic-native/sms-retriever';
+  import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
  
  
   constructor(private smsRetriever: SmsRetriever) { }
