@@ -58,8 +58,8 @@ var app = {
     }
 };
 ```
-
-Typescript
+You can fine working Demo for Ionic 4 here: https://github.com/hanatharesh2712/sms-plugin-test
+Typescript (Ionic 4)
 ```typescript
   import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
  
@@ -81,6 +81,40 @@ Typescript
     .then((res: any) => console.log(res))
     .catch((error: any) => console.error(error));
  
+  ```
+
+You can fine working Demo for Ionic 3 here: https://github.com/hanatharesh2712/sms-plugin-test-ionic-3
+  Typescript (Ionic 3)
+```typescript
+
+import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
+var smsRetriever = window['cordova']['plugins']['smsRetriever'];
+ 
+  public smsTextmessage: string = '';
+  public appHashString: string = '';
+  constructor(private smsRetriever: SmsRetriever) { }
+ 
+  ...
+ 
+  getHashCode() {
+    smsRetriever['getAppHash']((res) => {
+      this.appHashString = res;
+      console.log(res);
+    }, (err) => {
+      console.warn(err);
+    }
+    );
+  }
+
+  getSMS() {
+    smsRetriever['startWatching']((res) => {
+      this.smsTextmessage = res.Message;
+      console.log(res);
+    }, (err) => {
+      console.warn(err);
+    }
+    );
+  }
   ```
 
 You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
