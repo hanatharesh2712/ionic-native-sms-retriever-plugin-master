@@ -59,6 +59,7 @@ var app = {
 };
 ```
 You can fine working Demo for Ionic 4 here: https://github.com/hanatharesh2712/sms-plugin-test
+
   Typescript (Ionic 4)
 ```typescript
   import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
