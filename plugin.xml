@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-sms-retriever-manager" version="1.0.0">
+        id="cordova-plugin-sms-retriever-manager" version="1.0.2">
     <name>Device</name>
     <description>Cordova SMS Retriver Plugin</description>
     <license>MIT</license>
