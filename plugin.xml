@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-sms-retriever-manager" version="0.0.2">
+        id="cordova-plugin-sms-retriever-manager" version="1.0.0">
     <name>Device</name>
     <description>Cordova SMS Retriver Plugin</description>
     <license>MIT</license>
-    <keywords>cordova,device,SMS, SMS retriver</keywords>
+    <keywords>ionic, ionic3, cordova, cordova-plugin, phonegap-plugin, ionic-framework, ionic-cordova, sms, sms-verificationm automatic SMS receive</keywords>
     
     <js-module name="AndroidSmsRetriever" src="www/smsRetriever.js">
         <clobbers target="cordova.plugins.smsRetriever" />

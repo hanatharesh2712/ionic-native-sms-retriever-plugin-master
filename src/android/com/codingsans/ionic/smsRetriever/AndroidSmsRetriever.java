@@ -118,9 +118,13 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
   @Override
   public void onDestroy() {
-    if (mMessageReceiver != null) {
-      this.cordova.getActivity().getApplicationContext().unregisterReceiver(mMessageReceiver);
-      mMessageReceiver = null;
+    try {
+      if (mMessageReceiver != null) {
+        this.cordova.getActivity().getApplicationContext().unregisterReceiver(mMessageReceiver);
+        mMessageReceiver = null;
+      }
+    } catch(IllegalArgumentException e) {
+        e.printStackTrace();
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-sms-retriever-manager",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Cross-platform plugin for Cordova / PhoneGap to to easily retrive SMS using Google SMS retriver API. Available for Android.",
   "cordova": {
     "id": "cordova-plugin-sms-retriever-manager",
