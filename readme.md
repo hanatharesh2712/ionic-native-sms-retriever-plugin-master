@@ -58,7 +58,7 @@ var app = {
     }
 };
 ```
-You can fine working Demo for Ionic 4 here: https://github.com/hanatharesh2712/sms-plugin-test
+You can find working Demo for Ionic 4 here: https://github.com/hanatharesh2712/sms-plugin-test
 
   Typescript (Ionic 4)
 ```typescript
@@ -84,7 +84,7 @@ You can fine working Demo for Ionic 4 here: https://github.com/hanatharesh2712/s
  
   ```
 
-You can fine working Demo for Ionic 3 here: https://github.com/hanatharesh2712/sms-plugin-test-ionic-3
+You can find working Demo for Ionic 3 here: https://github.com/hanatharesh2712/sms-plugin-test-ionic-3
 
   Typescript (Ionic 3)
 ```typescript
