@@ -17,44 +17,46 @@ It is also possible to install via repo url directly (unstable), run :
 ```sh
 ionic cordova plugin add https://github.com/hanatharesh2712/ionic-native-sms-retriever-plugin-master.git
 ```
-
+You can find working Demo for Cordova here: https://github.com/hanatharesh2712/automatic-sms-cordova/tree/main/hello
 ## Using the plugin
 HTML
 
 ```html
-<input type="button" onclick="app.retriveSMS()" value="Read OTP from SMS" />
+ <input type="button" class="hashCode" value="Get App Hash" />
+ <input type="button" class="startWatching" value="Start watching SMS" />
 ```
 
 Javascript
 
 ```js
+
+document.querySelector('.hashCode').addEventListener('click', this.getAppHash);
+document.querySelector('.startWatching').addEventListener('click', this.retriveSMS);
+
 var app = {
+       getAppHash: function() {
+        window['cordova']['plugins']['smsRetriever']['getAppHash'](
+        (result) => { 
+            // Once you get this hash code of your app. Please remove this code.
+            alert(result);
+            console.log('Hash', result);
+        },
+        (err) => {
+            console.log(err);
+        });
+    }, 
+
     retriveSMS: function() {
         window['cordova']['plugins']['smsRetriever']['startWatching'](
       // the first callback is the success callback. We got back the native code’s result here.
       (result) => { 
+        alert(result.Message);
 		console.log('Message', result);
 	  },
       // the second is the error callback where we get back the errors
       (err) => {
         console.log(err);
-      }
-    );
-    }
-};
-```
-```js
-var app = {
-    getAppHash: function() {
-        window['cordova']['plugins']['smsRetriever']['getAppHash'](
-      (result) => { 
-		// Once you get this hash code of your app. Please remove this code.
-		console.log('Hash', result);
-	  },
-      (err) => {
-        console.log(err);
-      }
-    );
+      });
     }
 };
 ```
@@ -118,6 +120,10 @@ var smsRetriever = window['cordova']['plugins']['smsRetriever'];
     );
   }
   ```
+ Flow to test: 
+ [![flow](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)
+
+ 
 
 You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
 
