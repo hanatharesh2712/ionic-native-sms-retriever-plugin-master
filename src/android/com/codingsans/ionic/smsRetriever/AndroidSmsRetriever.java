@@ -11,7 +11,6 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -158,7 +157,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
       task.addOnFailureListener(new OnFailureListener() {
         @Override
-        public void onFailure(@NonNull Exception e) {
+        public void onFailure(Exception e) {
           // Failed to start retriever, inspect Exception for more details
           LOG.v(TAG, "Executing action: addOnFailureListener");
           //Toast.makeText(cordova.getActivity().getApplicationContext(),"Executing action: addOnFailureListener", Toast.LENGTH_SHORT).show();
