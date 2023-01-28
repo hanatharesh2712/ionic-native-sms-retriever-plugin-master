@@ -29,62 +29,58 @@ HTML
 Javascript
 
 ```js
-
 document.querySelector('.hashCode').addEventListener('click', this.getAppHash);
 document.querySelector('.startWatching').addEventListener('click', this.retriveSMS);
 
 var app = {
-       getAppHash: function() {
-        window['cordova']['plugins']['smsRetriever']['getAppHash'](
-        (result) => { 
-            // Once you get this hash code of your app. Please remove this code.
-            alert(result);
-            console.log('Hash', result);
-        },
-        (err) => {
-            console.log(err);
-        });
-    }, 
+  getAppHash: function() {
+    window['cordova']['plugins']['smsRetriever']['getAppHash'](
+    (result) => { 
+      // Once you get this hash code of your app. Please remove this code.
+      alert(result);
+      console.log('Hash', result);
+    },
+    (err) => {
+      console.log(err);
+    });
+  }, 
 
-    retriveSMS: function() {
-        window['cordova']['plugins']['smsRetriever']['startWatching'](
-      // the first callback is the success callback. We got back the native code’s result here.
-      (result) => { 
-        alert(result.Message);
-		console.log('Message', result);
-	  },
-      // the second is the error callback where we get back the errors
-      (err) => {
-        console.log(err);
-      });
-    }
+  retriveSMS: function() {
+    window['cordova']['plugins']['smsRetriever']['startWatching'](
+    // the first callback is the success callback. We got back the native code’s result here.
+    (result) => { 
+      alert(result.Message);
+      console.log('Message', result);
+    },
+    // the second is the error callback where we get back the errors
+    (err) => {
+      console.log(err);
+    });
+  }
 };
 ```
 You can find working Demo for Ionic 4 here: https://github.com/hanatharesh2712/sms-plugin-test
 
   Typescript (Ionic 4)
 ```typescript
-  import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
- 
- 
-  constructor(private smsRetriever: SmsRetriever) { }
- 
-  ...
- 
- // This function is to get hash string of APP.
- // * @return {Promise<string>} Returns a promise that resolves when successfully generate hash of APP.
-  this.smsRetriever.getAppHash()
-    .then((res: any) => console.log(res))
-    .catch((error: any) => console.error(error));
+import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
 
+constructor(private smsRetriever: SmsRetriever) { }
+
+...
+
+// This function is to get hash string of APP.
+// * @return {Promise<string>} Returns a promise that resolves when successfully generate hash of APP.
+this.smsRetriever.getAppHash()
+  .then((res: any) => console.log(res))
+  .catch((error: any) => console.error(error));
 
 // * This function start wathching message arrive event and retrive message text.
 // * @return {Promise<string>} Returns a promise that resolves when retrives SMS text or TIMEOUT after 5 min.
-   this.smsRetriever.startWatching()
-    .then((res: any) => console.log(res))
-    .catch((error: any) => console.error(error));
- 
-  ```
+ this.smsRetriever.startWatching()
+  .then((res: any) => console.log(res))
+  .catch((error: any) => console.error(error)); 
+```
 
 You can find working Demo for Ionic 3 here: https://github.com/hanatharesh2712/sms-plugin-test-ionic-3
 
@@ -93,37 +89,38 @@ You can find working Demo for Ionic 3 here: https://github.com/hanatharesh2712/s
 
 import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
 var smsRetriever = window['cordova']['plugins']['smsRetriever'];
- 
-  public smsTextmessage: string = '';
-  public appHashString: string = '';
-  constructor(private smsRetriever: SmsRetriever) { }
- 
-  ...
- 
-  getHashCode() {
-    smsRetriever['getAppHash']((res) => {
+
+public smsTextmessage: string = '';
+public appHashString: string = '';
+constructor(private smsRetriever: SmsRetriever) { }
+
+...
+
+getHashCode() {
+  smsRetriever['getAppHash'](
+    (res) => {
       this.appHashString = res;
       console.log(res);
     }, (err) => {
       console.warn(err);
     }
-    );
-  }
+  );
+}
 
-  getSMS() {
-    smsRetriever['startWatching']((res) => {
+getSMS() {
+  smsRetriever['startWatching'](
+    (res) => {
       this.smsTextmessage = res.Message;
       console.log(res);
     }, (err) => {
       console.warn(err);
     }
-    );
-  }
-  ```
- Flow to test: 
- [![flow](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)
+  );
+}
+```
 
- 
+Flow to test: 
+[![flow](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)](https://raw.githubusercontent.com/hanatharesh2712/automatic-sms-cordova/main/hello/res/ref-images/sms%20plugin%20demo.png)
 
 You need to send your application hash in SMS when you are sending from your backend. to generate the hash of your application read this: https://developers.google.com/identity/sms-retriever/verify
 
@@ -131,9 +128,6 @@ To get your application hash code:
 
 * Without the correct hash, your app won't recieve the message callback. This only needs to be
 * generated once per app and stored. Then you can remove this function from your code.
-
-
-
 
 BUILD FAILED
 
