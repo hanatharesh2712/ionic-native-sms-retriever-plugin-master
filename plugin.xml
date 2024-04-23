@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-sms-retriever-manager" version="1.0.4">
+        id="cordova-plugin-sms-retriever-manager" version="1.0.5">
     <name>Cordova SMS Retriver Plugin</name>
     <description>Easily retrieve SMS messages using the Google SMS Retriever API with our cross-platform plugin designed for Ionic/Cordova. This powerful tool streamlines the process and is specifically available for Android devices.</description>
     <license>MIT</license>
