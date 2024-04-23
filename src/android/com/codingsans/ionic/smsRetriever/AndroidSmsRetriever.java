@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 
 import static com.google.android.gms.common.api.CommonStatusCodes.*;
+import static android.content.Context.RECEIVER_EXPORTED;
 
 import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
@@ -151,7 +152,12 @@ public class AndroidSmsRetriever extends CordovaPlugin {
 
           IntentFilter intentFilter = new IntentFilter();
           intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-          cordova.getActivity().getApplicationContext().registerReceiver(mMessageReceiver, intentFilter);
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            cordova.getActivity().getApplicationContext().registerReceiver(mMessageReceiver, intentFilter, RECEIVER_EXPORTED);
+          } else {
+            cordova.getActivity().getApplicationContext().registerReceiver(mMessageReceiver, intentFilter);
+          }
+
         }
       });
 
@@ -209,7 +215,7 @@ public class AndroidSmsRetriever extends CordovaPlugin {
               final String message = extra.getString(SmsRetriever.EXTRA_SMS_MESSAGE);
               //if (!StringUtils.hasContent(message)) return;
               if(message == null) return;
-              
+
               Log.d(TAG, message);
 
               data = new JSONObject();
